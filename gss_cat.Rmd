@@ -35,9 +35,9 @@ tvhours_by_relig <- gss_cat %>%
 
 ggplot(data = tvhours_by_relig,
        mapping = aes(x = relig,
-                     y = avg_tvhours,
-                     fill = relig)) +
-  geom_col(show.legend = FALSE)+
+                     y = avg_tvhours)) +
+  geom_col(show.legend = FALSE,
+           fill = "turquoise")+
   coord_flip() +
   labs(title = "Average TV Consumption by Religon",
        x = "Religion",
@@ -55,9 +55,9 @@ tvhours_by_partyid <- gss_cat %>%
 
 ggplot(data = tvhours_by_partyid,
        mapping = aes(x = partyid,
-                     y = avg_tvhours,
-                     fill = partyid)) +
-  geom_col(show.legend = FALSE)+
+                     y = avg_tvhours)) +
+  geom_col(show.legend = FALSE,
+           fill = "lightgreen")+
   coord_flip() +
   labs(title = "Average TV Consumption by Party ID",
        x = "Political Party",
@@ -75,9 +75,9 @@ tvhours_by_rincome <- gss_cat %>%
 
 ggplot(data = tvhours_by_rincome,
        mapping = aes(x = rincome,
-                     y = avg_tvhours,
-                     fill = rincome)) +
-  geom_col(show.legend = FALSE)+
+                     y = avg_tvhours)) +
+  geom_col(show.legend = FALSE,
+           fill = "lightblue")+
   coord_flip() +
   labs(title = "Average TV Consumption by Income",
        x = "Reported Income",
