@@ -1,0 +1,87 @@
+---
+title: "GSS Categorical Data"
+author: "Christina Chong"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+```{r load packages}
+library(tidyverse)
+```
+
+# About the General Social Survery (GSS)
+The General Social Survey (GSS) is a project of NORC at the University of Chicago, with principal funding from the National Science Foundation. Since 1972, the GSS has been monitoring societal change and studying the growing complexity of American society.
+
+The GSS is a publicly available national resource, and is one of the most frequently analyzed sources of information in the social sciences. GSS Data Explorer is one of many ways that NORC supports the dissemination of GSS data for use by legislators, policymakers, researchers, educators and others.
+
+GSS Data Explorer was designed to make the GSS more accessible and provide the tools necessary to transform data into useful knowledge. Features include the most sophisticated and intuitive interface of any data dissemination tool in current use and robust support through tutorials, FAQs, and a helpdesk. It also includes public and private collaboration spaces that, among other things, allow teachers to use the GSS Data Explorer as a virtual classroom.
+
+## Television Consumption
+Let's take a look at how much TV is watched per day by various groups.
+
+```{r tvhours_by_relig}
+tvhours_by_relig <- gss_cat %>%
+  group_by(relig) %>% 
+  summarise(avg_tvhours = mean(tvhours,
+                               na.rm = TRUE)) %>% 
+  drop_na(relig)
+
+ggplot(data = tvhours_by_relig,
+       mapping = aes(x = relig,
+                     y = avg_tvhours,
+                     fill = relig)) +
+  geom_col(show.legend = FALSE)+
+  coord_flip() +
+  labs(title = "Average TV Consumption by Religon",
+       x = "Religion",
+       y = "TV Consumption (hours)") +
+  scale_y_continuous(limits = c(0, 5),
+                     breaks = seq(0, 5, by = 0.5))
+```
+
+```{r tvhours_by_partyid}
+tvhours_by_partyid <- gss_cat %>%
+  group_by(partyid) %>% 
+  summarise(avg_tvhours = mean(tvhours,
+                               na.rm = TRUE)) %>% 
+  drop_na(partyid)
+
+ggplot(data = tvhours_by_partyid,
+       mapping = aes(x = partyid,
+                     y = avg_tvhours,
+                     fill = partyid)) +
+  geom_col(show.legend = FALSE)+
+  coord_flip() +
+  labs(title = "Average TV Consumption by Party ID",
+       x = "Political Party",
+       y = "TV Consumption (hours)") +
+  scale_y_continuous(limits = c(0, 5),
+                     breaks = seq(0, 5, by = 0.5))
+```
+
+```{r tvhours_by_rincome}
+tvhours_by_rincome <- gss_cat %>%
+  group_by(rincome) %>% 
+  summarise(avg_tvhours = mean(tvhours,
+                               na.rm = TRUE)) %>% 
+  drop_na(rincome)
+
+ggplot(data = tvhours_by_rincome,
+       mapping = aes(x = rincome,
+                     y = avg_tvhours,
+                     fill = rincome)) +
+  geom_col(show.legend = FALSE)+
+  coord_flip() +
+  labs(title = "Average TV Consumption by Income",
+       x = "Reported Income",
+       y = "TV Consumption (hours)") +
+  scale_y_continuous(limits = c(0, 5),
+                     breaks = seq(0, 5, by = 0.5))
+```
